@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "@/db";
 import { fayda } from "fayda";
+import { db } from "@/db";
 
 export const auth = betterAuth({
 	database: drizzleAdapter(db, {
@@ -13,4 +13,10 @@ export const auth = betterAuth({
 			privateKey: process.env.PRIVATE_KEY as string,
 		}),
 	],
+	account: {
+		accountLinking: {
+			enabled: true,
+			trustedProviders: ["fayda"],
+		},
+	},
 });
